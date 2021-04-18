@@ -1,14 +1,19 @@
-const dotenv = require('dotenv');
-dotenv.config();
-console.log(`Your API key is ${process.env.API_KEY}`);
+// const dotenv = require('dotenv');
+// dotenv.config();
+// console.log(`Your API key is ${process.env.API_KEY}`);
 var path = require('path')
 const express = require('express')
 const mockAPIResponse = require('./mockAPI.js')
-
+const cors = require('cors');
 const app = express()
 
-app.use(express.static('dist'))
 
+app.use(cors());
+app.use(express.static('dist'))
+app.use(express.json());
+app.use(express.urlencoded({
+    extended: false
+}));
 console.log(__dirname)
 
 app.get('/', function(req, res) {
